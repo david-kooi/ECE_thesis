@@ -13,7 +13,7 @@
 %   Revision: 0.0.0.3 Date: 05/20/2015 3:42:00
 clc;
 clear all;
-close all;
+
 
 global ctl;
 global max_x2;

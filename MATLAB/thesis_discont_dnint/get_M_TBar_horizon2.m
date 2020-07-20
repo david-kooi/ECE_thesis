@@ -14,7 +14,7 @@ x_dot = A*x_o + B*u_o;
 % Iterate through multiple values of TBar
 T_max = 2;
 T_min = Ts_min;
-N = 4;
+N = 10;
 delta = (T_max-T_min) / N;
 
 [Xrange0, Trange0] = get_reach_set_stepped(x_o, u_o, T_max);
@@ -28,8 +28,8 @@ for( n0 = 0:N-1)
    subReach0 = Xrange0(idx, :);
    subTime0  = Trange0(idx,:);
    
-   %figure(10);
-   %scatter(subReach0(:,1), subReach0(:,2));  
+%    figure(10);
+%    scatter(subReach0(:,1), subReach0(:,2));  
    
    [M0, arg_M] = get_M(x_o, u_o, TBar0, subReach0, subTime0);
    
@@ -40,16 +40,17 @@ for( n0 = 0:N-1)
    %% Fill with expansion
    x_1 = arg_M';
    u_1 = ctl(x_1);
+   [Xrange1, Trange1] = get_reach_set_stepped(x_1, u_1, T_max);
    for(n1 = 0:N-1)
       TBar1 = T_min + n1*delta;
-      [Xrange1, Trange1] = get_reach_set_stepped(x_1, u_1, T_max);
+      
       idx = find(Trange1 < TBar1);
       subReach1 =  Xrange1(idx,:);
-      subTime1 = Xrange1(idx,:);
+      subTime1  =  Xrange1(idx,:);
       
-      %figure(10);
-      %scatter(subReach1(:,1), subReach1(:,2));
-      %hold on;
+%       figure(10);
+%       scatter(subReach1(:,1), subReach1(:,2));
+%       hold on;
       
       M1  = get_M(x_1, u_1, TBar1, subReach1, subTime1);
       Ts1 = get_Ts(x_1, M1, TBar1);
@@ -61,8 +62,8 @@ for( n0 = 0:N-1)
 end
 
 % Performance = c*Ts0 + (1-c)Ts1, c \in [0,1]
-c = 0.5;
-P = zeros(N)
+c = 0.4;
+P = zeros(N);
 for(n = 1:N)
    Ts0 = Ts_arr(n,1);
    P(n, :) = c*Ts0 + (1-c).*Ts_arr(n, 2:end);

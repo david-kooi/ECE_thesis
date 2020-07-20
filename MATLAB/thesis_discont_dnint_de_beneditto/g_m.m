@@ -52,7 +52,7 @@ Ts   = x(6);
 u      = ctl([x1;x2]);
 xo = [x1;x2];
 
-v = 0.50;
+v = 0.85;
 xo = [x1;x2];
 
 I1 = a4(delta)*M1(xo);
