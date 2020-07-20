@@ -27,9 +27,9 @@ global B;
 initialization();
 
 % initial conditions
-%x1_o = 0.2; x2_o = -0.2; % Original
+x1_o = 0.2; x2_o = -0.2; % Original
 
-x1_o = 0; x2_o = 0.3;
+%x1_o = 0; x2_o = 0.3;
 xo = [x1_o; x2_o];
 
 

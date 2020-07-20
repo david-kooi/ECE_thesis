@@ -19,6 +19,7 @@ global max_Tbar;
 global max_x2;
 global max_x;
 global max_x_dot;
+global max_norm;
 
 global ctl;
 
@@ -67,7 +68,7 @@ Xrange = [sls(1,j); sls(2,j)];
 max_x2 = max(abs(sls(2,j)));
 max_x  = max(norm(sls(1:2,j)));
 max_x_dot = max(norm((A*Xrange + B*ctl(Xrange))));
-
+max_norm = max(vecnorm(Xrange));
 
 % Matrix Form
 alpha = @(x) x'*Q*x;

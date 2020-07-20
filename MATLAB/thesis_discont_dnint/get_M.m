@@ -1,4 +1,4 @@
-function M = get_M(x_o, u_o, TBar, Xrange, Trange)
+function [M,arg_M] = get_M(x_o, u_o, TBar, Xrange, Trange)
 
 global A;
 global B;
@@ -24,6 +24,10 @@ grad_rho =  -[drho_dx1, drho_dx2];
 
 V_val = V(x_o);
 inner_rho = dot(grad_rho', F_u);
-M = max(inner_rho);
+[M, arg_M_idx] = max(inner_rho);
+
+arg_M = Xrange(arg_M_idx,:);
+%plot(arg_M(1), arg_M(2), 'r*');
+%hold on;
 
 end

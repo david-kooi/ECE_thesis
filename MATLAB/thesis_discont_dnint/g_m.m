@@ -51,14 +51,13 @@ norm_F_xo = norm(A*x_o + B*u_o);
 norm_Fxo_arr = [norm_Fxo_arr norm_F_xo];
 
 
-[M, TBar] = get_M_TBar_scaled(x_o, u_o);
+%[M, TBar] = get_M_TBar_scaled(x_o, u_o);
 %[M, TBar] = get_M_TBar_horizon(x_o, u_o);
-%[M, TBar] = get_M_TBar_horizon2(x_o, u_o);
+[M, TBar] = get_M_TBar_horizon2(x_o, u_o);
 TBar_arr = [TBar_arr TBar];
 
 
-rho = V_sls_value - V(x_o);
-Ts_plus = max(Ts_min, min(TBar, rho/M)) ;
+Ts_plus = get_Ts(x_o, M, TBar);
 
 xplus = [t; x1; x2; 0; u_o; Ts_plus];
 end

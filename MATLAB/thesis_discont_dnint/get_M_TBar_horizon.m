@@ -16,7 +16,7 @@ T_min = 0.1;
 %T_min = get_TBar_scaled(x_dot);
 
 
-N = 1000;
+N = 10;
 delta = (T_max-T_min) / N;
 
 [Xrange, Trange] = get_reach_set_stepped(x_o, u_o, T_max);
@@ -32,8 +32,9 @@ for( n = 0:N)
    subReach = Xrange(idx, :);
    subTime  = Trange(idx,:);
    
-   %figure(10);
-   %scatter(subReach(:,1), subReach(:,2));
+   figure(10);
+   scatter(subReach(:,1), subReach(:,2));
+   hold on;
    
    M = get_M(x_o, u_o, TBar, subReach, subTime);
    %M = get_M(x_o, u_o, TBar);
