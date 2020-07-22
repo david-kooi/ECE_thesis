@@ -17,7 +17,7 @@ T_min = Ts_min;
 N = 10;
 delta = (T_max-T_min) / N;
 
-[Xrange0, Trange0] = get_reach_set_stepped(x_o, u_o, T_max);
+[Xrange0, Trange0, x_f0] = get_reach_set_stepped(x_o, u_o, T_max);
 
 Ts_arr = zeros(N, N+1);
 M_arr  = [];
@@ -39,6 +39,7 @@ for( n0 = 0:N-1)
    
    %% Fill with expansion
    x_1 = arg_M';
+   %x_1 = x_f0;
    u_1 = ctl(x_1);
    [Xrange1, Trange1] = get_reach_set_stepped(x_1, u_1, T_max);
    for(n1 = 0:N-1)

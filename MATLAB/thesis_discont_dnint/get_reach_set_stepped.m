@@ -1,4 +1,4 @@
-function [Xrange, Trange] = get_reach_set_stepped(x_o, u_o, TBar)
+function [Xrange, Trange, x_f] = get_reach_set_stepped(x_o, u_o, TBar)
 
 global state_grid;
 global max_norm;
@@ -43,6 +43,7 @@ end
 idx = find(vecnorm(Xrange') < max_norm);
 Xrange = Xrange(idx,:);
 Tout   = Tout(idx);
+x_f    = Xrange(end,:)';
 
 
 %% Inflation of solution
