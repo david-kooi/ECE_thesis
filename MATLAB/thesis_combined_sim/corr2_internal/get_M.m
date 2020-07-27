@@ -2,7 +2,6 @@ function [M,arg_M] = get_M(x_o, u_o, TBar, Xrange, Trange)
 
 global A;
 global B;
-global state_grid;
 global V;
 
 % If Xrange is not provided, compute a non-iterated reach set

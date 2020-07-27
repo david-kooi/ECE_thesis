@@ -65,5 +65,10 @@ max_x     = max(norm(sls(1:2,j)));
 max_x_dot = max(norm((A*Xrange + B*ctl(Xrange))));
 max_norm  = max(vecnorm(Xrange));
 
-
+%% Common Simulation Parameters
+global x1_o; global x2_o;
+global T;
+x1_o = 0.2;
+x2_o = -0.2;
+T = 30;
 

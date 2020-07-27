@@ -1,6 +1,5 @@
 function [Xrange, Trange] = get_reach_set_stepped(x_o, u_o, TBar)
 
-global state_grid;
 global max_norm;
 global V;
 global V_sls_value;
@@ -12,7 +11,7 @@ options = odeset();
 
 % Inflate the trajectory (The indexes of the nearest neighbors)
 % Comment out below to use the perfect reach set. 
-r = 0.025;
+global r;
 
 sparse_Xrange = [Xrange(1,:)];
 sparse_Trange = [Tout(1)];
@@ -53,6 +52,7 @@ for (i_x = 1:length(Xrange))
     
     if(V(x_i') <= V_sls_value)
         
+        %% Make a cirlce of radius r around the point
         N = 10; % 10 steps 
         d_theta = (2*pi)/N;
         for(n = 0:N)

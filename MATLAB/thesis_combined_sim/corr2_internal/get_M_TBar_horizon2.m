@@ -2,19 +2,17 @@ function [M1,TBar] = get_M_TBar_horizon(x_o, u_o)
 
 global A;
 global B;
-global TBar_arr;
 global V;
-global Ts_min;
 global V_sls_value;
 global ctl;
 
-rho = V_sls_value - V(x_o);
+rho   = V_sls_value - V(x_o);
 x_dot = A*x_o + B*u_o;
 
 % Iterate through multiple values of TBar
-T_max = 2;
-T_min = Ts_min;
-N = 10;
+global T_min;
+global T_max;
+global N;
 delta = (T_max-T_min) / N;
 
 [Xrange0, Trange0] = get_reach_set_stepped(x_o, u_o, T_max);
@@ -40,6 +38,7 @@ for( n0 = 0:N-1)
    %% Fill with expansion
    x_1 = arg_M';
    %x_1 = x_f0;
+   
    u_1 = ctl(x_1);
    [Xrange1, Trange1] = get_reach_set_stepped(x_1, u_1, T_max);
    for(n1 = 0:N-1)
@@ -63,11 +62,11 @@ for( n0 = 0:N-1)
 end
 
 % Performance = c*Ts0 + (1-c)Ts1, c \in [0,1]
-c = 0.4;
+global ch;
 P = zeros(N);
 for(n = 1:N)
    Ts0 = Ts_arr(n,1);
-   P(n, :) = c*Ts0 + (1-c).*Ts_arr(n, 2:end);
+   P(n, :) = ch*Ts0 + (1-ch).*Ts_arr(n, 2:end);
     
 end
 [Ts_max, max_lin_idx] = max(P,[],'all','linear');

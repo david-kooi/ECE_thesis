@@ -1,3 +1,10 @@
+% ------------------
+% University of California Santa Cruz
+% Hybrid Systems Lab
+% Masters Thesis 2020
+% David Kooi
+% ------------------
+
 function initialization_corr2(in_T_min, in_T_max, in_r, in_N, in_cs, in_ch, in_TBar_method)
 
 %% Tunable parameters
