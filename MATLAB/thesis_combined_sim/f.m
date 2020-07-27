@@ -1,18 +1,19 @@
-function xplus = g_m(x)
+function xdot = f(x)
 %--------------------------------------------------------------------------
 % Matlab M-file Project: HyEQ Toolbox @  Hybrid Systems Laboratory (HSL), 
 % https://hybrid.soe.ucsc.edu/software
 % http://hybridsimulator.wordpress.com/
-% Filename: g_ex1_2.m
+% Filename: f_ex1_2.m
 %--------------------------------------------------------------------------
 % Project: Simulation of a hybrid system (bouncing ball)
-% Description: Jump map
+% Description: Flow map
 %--------------------------------------------------------------------------
 %--------------------------------------------------------------------------
 %   See also HYEQSOLVER, PLOTARC, PLOTARC3, PLOTFLOWS, PLOTHARC,
 %   PLOTHARCCOLOR, PLOTHARCCOLOR3D, PLOTHYBRIDARC, PLOTJUMPS.
 %   Copyright @ Hybrid Systems Laboratory (HSL),
 %   Revision: 0.0.0.3 Date: 05/20/2015 3:42:00
+
 global A;
 global B;
 global P;
@@ -26,18 +27,6 @@ global alpha;
 global gamma;
 global F;
 global lam_Q_min;
-global state_grid;
-
-
-global ctl;
-
-global T_arr;
-global Ts_arr;
-global TBar_arr;
-global norm_Fxo_arr;
-global getTBar_scaled;
-global Ts_min;
-
 
 % State: x = [t x1 x2 tau u Ts]
 t    = x(1);
@@ -47,24 +36,7 @@ tau  = x(4);
 u    = x(5);
 Ts   = x(6);
 
-x_o    = [x1;x2];
-u_o      = ctl(x_o);
-norm_F_xo = norm(A*x_o + B*u_o);
-norm_Fxo_arr = [norm_Fxo_arr norm_F_xo];
+state_dot = A*[x1;x2] + B*u;
 
-
-%[M, TBar] = get_M_TBar_scaled(x_o, u_o);
-%[M, TBar] = get_M_TBar_horizon(x_o, u_o);
-[M, TBar] = get_M_TBar_horizon2(x_o, u_o);
-
-
-TBar_arr = [TBar_arr TBar];
-
-
-Ts_plus = get_Ts(x_o, M, TBar);
-
-T_arr = [T_arr t];
-Ts_arr = [Ts_arr Ts_plus];
-
-xplus = [t; x1; x2; 0; u_o; Ts_plus];
+xdot = [1; state_dot; 1; 0; 0];
 end

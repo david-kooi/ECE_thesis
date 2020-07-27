@@ -59,21 +59,10 @@ for (i_x = 1:length(Xrange))
             theta = n*d_theta;
             dx  = r*cos(theta);
             dy  = r*sin(theta);
-            x_r = x_i(1) = 
-            reach_set = [reach_set; [ ]
-            
+            x_r = [x_i(1) + dx, x_i(2) + dy];
+            reach_set = [reach_set; [x_r, t_i]];
         end
-        
-        IDX = rangesearch(state_grid, x_i, r);
-        for(i = 1:length(IDX))
-            grid_idx = IDX(i);
-            grid_idx = grid_idx{1};
-            grid_points = state_grid(grid_idx, :);
-            num_points = length(grid_points(:,1));
-            reach_set = [reach_set; [grid_points, zeros(num_points, 1)+t_i]];
-        end
-        
-        
+
     else
         
         % Ignore all x s.t V(x) > V_sls_value

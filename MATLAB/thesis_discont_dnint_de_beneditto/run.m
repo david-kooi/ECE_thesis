@@ -62,7 +62,7 @@ data.Ts_arr = Ts_arr;
 
 
 
-
+% Plot state
 figure(11);
 modF{1} = 'm';
 
@@ -71,8 +71,10 @@ modJ{2} = 'Marker';
 modJ{3} = '.';
 
 plotHarc(t,j,x(:,2), [], modF, modJ);
-xlabel("t(seconds)");
+xlabel("Time(s)");
 ylabel("x_1");
+set(gca, 'FontName', 'Times New Roman');
+set(gcf,'Position',[100 100 500 200]);
 hold on;
 
 % Sample period plot
@@ -85,8 +87,10 @@ modJ{3} = '.';
 
 
 plotHarc(t,j,x(:,6), [0,j(end)], modF, modJ);
-xlabel("t(seconds)");
-ylabel("Sample Period (seconds)");
+xlabel("Time(s)");
+ylabel("Sample Period (s)");
+set(gca, 'FontName', 'Times New Roman');
+set(gcf,'Position',[100 100 500 200]);
 hold on;
 
 

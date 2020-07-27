@@ -80,7 +80,7 @@ modJ{1} = 'k';
 modJ{2} = 'Marker';
 modJ{3} = 'x';
 modJ{4} = 'MarkerSize';
-modJ{5} = 20;
+modJ{5}
 
 plotHarc(t,j,x(:,2), [], modF, modJ);
 xlabel("Time(s)");
@@ -102,7 +102,7 @@ T_arr =  [T_arr T_arr(end) + Ts_arr(end)];
 Ts_arr = [Ts_arr Ts_arr(end)];
 stairs(T_arr, Ts_arr, "k");
 hold on;
-scatter(T_arr, Ts_arr, 20,"xk");
+scatter(T_arr, Ts_arr, "xk");
 % plotHarc(t,j,x(:,6), [0,j(end)], modF, modJ);
 xlabel("Time(s)");
 ylabel("Sample Period (s)");
