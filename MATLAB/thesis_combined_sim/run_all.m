@@ -2,8 +2,8 @@ clear all;
 close all;
 
 %% Initial Condition and Time Horizon
-x1_o = 0.3;
-x2_o = -0.1;
+x1_o = -0.1;
+x2_o = 0.3;
 T = 10;
 initialization_common(T, x1_o, x2_o);
 
@@ -72,11 +72,11 @@ fprintf('EventTriggered: %f\n\n', Ts_avg_ev);
 
 %% Plot the results
 % Figure Parameters
-width       = 500;
-height      = 200;
+width       = 1000;
+height      = 400;
 font_size   = 25;
-marker_size = 9;
-line_width  = 1.5;
+marker_size = 15;
+line_width  = 2;
 
 % Individual plots
 
@@ -91,6 +91,8 @@ plotHarc(t_corr2,j_corr2,V_corr2, [], modF, modJ);
 xlabel("Time(s)");
 ylabel("V(x)");
 set_figure_options(width, height, font_size);
+export_figure('corr2_V.eps');
+
 
 % Corollary 2 Ts plot
 figure(2);
@@ -99,6 +101,7 @@ plot_Ts(T_corr2, Ts_corr2, color, line_width, marker, marker_size);
 xlabel("Time(s)");
 ylabel("Sample Period (s)");
 set_figure_options(width, height, font_size);
+export_figure('corr2_Ts.eps');
 
 
 %% DiBenedetto
@@ -112,6 +115,7 @@ plotHarc(t_diben,j_diben,V_diben, [], modF, modJ);
 xlabel("Time(s)");
 ylabel("V(x)");
 set_figure_options(width, height, font_size);
+export_figure('diben_V');
 
 % DiBenedetto Ts Plot
 figure(4);
@@ -120,6 +124,7 @@ plot_Ts(T_diben, Ts_diben, color, line_width, marker, marker_size);
 xlabel("Time(s)");
 ylabel("Sample Period (s)");
 set_figure_options(width, height, font_size);
+export_figure('diben_Ts.eps');
 
 %% Event Triggered
 % Event Triggered V plot
@@ -132,6 +137,7 @@ plotHarc(t_ev,j_ev,V_ev, [], modF, modJ);
 xlabel("Time(s)");
 ylabel("V(x)");
 set_figure_options(width, height, font_size);
+export_figure('ev_V.eps');
 
 % Event Triggered Ts Plot
 figure(6);
@@ -146,4 +152,5 @@ plot_Ts(T_ev, Ts_ev, color, line_width, marker, marker_size);
 xlabel("Time(s)");
 ylabel("Sample Period (s)");
 set_figure_options(width, height, font_size);
+export_figure("ev_Ts.eps");
 

@@ -2,9 +2,9 @@ clear all;
 close all;
 
 %% Initial Condition and Time Horizon
-x1_o = 0.;
-x2_o = -0.2;
-T = 20;
+x1_o = -0.1;
+x2_o = 0.3;
+T = 10;
 initialization_common(T, x1_o, x2_o);
 
 %% Run Corollary 2
@@ -72,11 +72,11 @@ fprintf('EventTriggered: %f\n\n', Ts_avg_ev);
 
 %% Plot the results
 % Figure Parameters
-width       = 500;
-height      = 200;
+width       = 1000;
+height      = 400;
 font_size   = 25;
-marker_size = 9;
-line_width  = 1.5;
+marker_size = 15;
+line_width  = 2;
 
 % Individual plots
 
@@ -91,6 +91,10 @@ plotHarc(t_corr2,j_corr2,V_corr2, [], modF, modJ);
 xlabel("Time(s)");
 ylabel("V(x)");
 set_figure_options(width, height, font_size);
+s=hgexport('readstyle','MSWord');
+fnam='myfig.jpeg'; % your file name
+s.Format = 'jpeg'; %I needed this to make it work but maybe you wont.
+ hgexport(gcf,fnam,s);
 
 % Corollary 2 Ts plot
 figure(2);

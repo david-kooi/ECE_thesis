@@ -68,8 +68,9 @@ end
 %scatter3(sls(1,:)',sls(2,:)', sls(3,:)');
 j = boundary(sls(1,:)', sls(2,:)');
 V_sls_boundary = [sls(1,j)',sls(2,j)']';
-%figure(10);
+figure(10);
 %plot3(sls(1,j),sls(2,j),sls(2,j)*0 + V_sls_value);
+plot(sls(1,j),sls(2,j));
 xlabel("x_1"); ylabel("x_2");
 hold on;
 
