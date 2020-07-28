@@ -89,12 +89,17 @@ ylabel("V(x)");
 set_figure_options(width, height, font_size);
 
 % Corollary 2 Ts plot
-figure(2);
+figure_number = 2;
+plot_Ts(figure_number, color, line_width, marker, marker_size);
+
 global T_corr2; global Ts_corr2;
-plot_Ts(T_corr2, Ts_corr2, color, line_width, marker, marker_size);
+T_corr2 = T_corr2 - T_corr2(1);
+figure(2);
+stairs(T_corr2, Ts_corr2, color);
+hold on;
+scatter(T_corr2, Ts_corr2, color, marker);
 xlabel("Time(s)");
 ylabel("Sample Period (s)");
-set_figure_options(width, height, font_size);
 
 
 %% DiBenedetto
@@ -103,18 +108,10 @@ color  = 'm';
 marker = 'd'; 
 [modF, modJ] = get_hybrid_plot_mods(color, line_width, marker, marker_size);
 
-figure(3);
+figure(2);
 plotHarc(t_diben,j_diben,V_diben, [], modF, modJ);
 xlabel("Time(s)");
 ylabel("V(x)");
-set_figure_options(width, height, font_size);
-
-% DiBenedetto Ts Plot
-figure(4);
-global T_diben; global Ts_diben;
-plot_Ts(T_diben, Ts_diben, color, line_width, marker, marker_size);
-xlabel("Time(s)");
-ylabel("Sample Period (s)");
 set_figure_options(width, height, font_size);
 
 %% Event Triggered
@@ -123,17 +120,36 @@ color  = 'k';
 marker = 'o'; 
 [modF, modJ] = get_hybrid_plot_mods(color, line_width, marker, marker_size);
 
-figure(5);
+figure(3);
 plotHarc(t_ev,j_ev,V_ev, [], modF, modJ);
 xlabel("Time(s)");
 ylabel("V(x)");
 set_figure_options(width, height, font_size);
 
-% Event Triggered Ts Plot
-figure(6);
-global T_ev; global Ts_ev;
-plot_Ts(T_ev, Ts_ev, color, line_width, marker, marker_size);
+
+
+
+
+
+
+%%
+
+% Sample period
+figure(2);
+modF{1} = 'b';
+
+modJ{1} = 'b';
+modJ{2} = 'Marker';
+modJ{3} = 'd';
+
+T_arr = T_arr - T_arr(1);
+stairs(T_arr, Ts_arr, "b");
+hold on;
+scatter(T_arr, Ts_arr, "b*");
+% plotHarc(t,j,x(:,6), [0,j(end)], modF, modJ);
 xlabel("Time(s)");
 ylabel("Sample Period (s)");
-set_figure_options(width, height, font_size);
+set(gca, 'FontName', 'Times New Roman');
+set(gcf,'Position',[2 2 500 200]);
+hold on;
 

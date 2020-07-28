@@ -54,4 +54,10 @@ end
 Ts_plus = Ts_max;
 
 xplus = [t; x1; x2; 0; u; Ts_plus];
+
+%% Data Recording
+global T_diben;
+global Ts_diben;
+T_diben = [T_diben t];
+Ts_diben = [Ts_diben Ts_plus];
 end

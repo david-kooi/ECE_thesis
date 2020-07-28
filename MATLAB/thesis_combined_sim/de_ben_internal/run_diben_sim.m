@@ -1,7 +1,6 @@
 function [t_diben, j_diben, x_diben] = run_diben_sim(v)
 
 initialization_diben(v);
-global v;
 
 global ctl;
 

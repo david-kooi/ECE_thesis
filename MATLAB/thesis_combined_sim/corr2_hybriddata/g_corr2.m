@@ -33,15 +33,16 @@ Ts_plus = get_Ts(x_o, M, TBar);
 xplus   = [t; x1; x2; 0; u_o; Ts_plus];
 
 %% Data Recording
-global T_arr;
-global Ts_arr;
+global T_corr2;
+global Ts_corr2;
+T_corr2 = [T_corr2 t];
+Ts_corr2 = [Ts_corr2 Ts_plus];
+
 global TBar_arr;
 global norm_Fxo_arr;
-
 norm_F_xo    = norm(A*x_o + B*u_o);
 norm_Fxo_arr = [norm_Fxo_arr norm_F_xo];
 TBar_arr = [TBar_arr TBar];
-T_arr = [T_arr t];
-Ts_arr = [Ts_arr Ts_plus];
+
 
 end

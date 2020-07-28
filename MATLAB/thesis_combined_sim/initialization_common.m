@@ -1,3 +1,17 @@
+%% Common Simulation Parameters
+global x1_o; global x2_o;
+global T;
+x1_o = 0.2;
+x2_o = -0.2;
+T = 10;
+
+%% Data logging structures
+global T_corr2; global Ts_corr2;
+T_corr2 = []; Ts_corr2 = [];
+global T_diben; global Ts_diben;
+T_diben = []; Ts_diben = [];
+global T_ev;    global Ts_ev;
+T_ev = []; Ts_ev = [];
 
 
 %% Linear Dynamics
@@ -71,11 +85,4 @@ max_x_dot = max(norm((A*Xrange + B*ctl(Xrange))));
 max_norm  = max(vecnorm(Xrange));
 delta = max(vecnorm(sls(1:2,:))); % Technically a diben specific parameter, but
                                   % easier to define here
-
-%% Common Simulation Parameters
-global x1_o; global x2_o;
-global T;
-x1_o = 0.2;
-x2_o = -0.2;
-T = 30;
 

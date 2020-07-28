@@ -38,4 +38,10 @@ Ts_arr = [Ts_arr tau];
 xplus = [t; x1; x2; 0; u; tau];
 
 x1_p = x1; x2_p = x2;
+
+%% Data Recording
+global T_ev;
+global Ts_ev;
+T_ev = [T_ev t];
+Ts_ev = [Ts_ev tau];
 end
