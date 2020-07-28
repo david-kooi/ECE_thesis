@@ -5,12 +5,14 @@
 % David Kooi
 % ------------------
 
-function [t_corr2, j_corr_2, x_corr2] = run_corr2_sim(Ts_min, T_min, T_max, r, N, cs, ch, method)
+function [t_corr2, j_corr2, x_corr2] = run_corr2_sim(Ts_star, T_min, T_max, r, N, cs, ch, method)
 global ctl;
 
 global x1_o; global x2_o;
 global T;
 
+global Ts_min;
+Ts_min = Ts_star;
 initialization_corr2(T_min, T_max, r, N, cs, ch, method);
 
 u_o  = ctl([x1_o;x2_o]);
@@ -31,6 +33,6 @@ rule = 1;
 options = odeset('RelTol',1e-6,'MaxStep',.1);
 
 % simulate
-[t_corr2,j_corr2,x_corr2] = HyEQsolver( @f,@g_corr2,@C_corr2,@D_corr2,x0,TSPAN,JSPAN,rule,options,'ode23t');
+[t_corr2, j_corr2, x_corr2] = HyEQsolver( @f_common,@g_corr2,@C_corr2,@D_corr2,x0,TSPAN,JSPAN,rule,options,'ode23t');
 
 end

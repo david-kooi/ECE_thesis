@@ -24,6 +24,7 @@ ch = in_ch;
 TBar_method = in_TBar_method;
 
 %% Robustness Functions
+global Q;
 global alpha;
 global gamma;
 

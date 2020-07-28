@@ -9,6 +9,9 @@ global K;
 global V;
 global ctl;
 global lam_Q_min;
+global lam_P_max;
+global lam_P_min;
+global delta;
 
 A = [0, 1; -2, 3];
 B = [0; 1];
@@ -19,6 +22,8 @@ ctl = @(x) K*x;
 Q = [0.5, 0.25; 0.25, 1.5];
 P = [1, 0.25; 0.25, 1];
 lam_Q_min = min(eig(Q));
+lam_P_max = max(eig(P));
+lam_P_min = min(eig(P));
 
 
 %% Sublevel set configuration
@@ -64,6 +69,8 @@ max_x2    = max(abs(sls(2,j)));
 max_x     = max(norm(sls(1:2,j)));
 max_x_dot = max(norm((A*Xrange + B*ctl(Xrange))));
 max_norm  = max(vecnorm(Xrange));
+delta = max(vecnorm(sls(1:2,:))); % Technically a diben specific parameter, but
+                                  % easier to define here
 
 %% Common Simulation Parameters
 global x1_o; global x2_o;

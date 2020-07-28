@@ -1,13 +1,10 @@
-clear all;
-close all;
-
+function minT_calc_corr2(Ts_star, T_min, T_max, r, N, cs, ch, method)
+initialization_corr2(T_min, T_max, r, N, cs, ch, method);
 
 global A;
 global B;
 global P;
 global alpha;
-
-initialization();
 
 tspan = 0:0.01:40;
 
@@ -25,7 +22,7 @@ ylabel("$T^*_s$",'interpreter','latex' );
 % plot(Ts_arr);
 % title("Ts(x_o)")
 
-
+end
 
 
 
