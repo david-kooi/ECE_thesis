@@ -8,5 +8,7 @@ modJ{2} = 'Marker';
 modJ{3} = marker;
 modJ{4} = 'MarkerSize';
 modJ{5} = marker_size;
+modJ{6} = 'MarkerFaceColor';
+modJ{7} = color;
 
 end

@@ -45,9 +45,11 @@ x2_ev = x_ev(:,3);
 u_ev  = x_ev(:,4);
 V_ev  = get_V(x1_ev, x2_ev);
 
-%Ts_ev = x_ev(:,6);
-
-global Ts_ev;
+global T_ev; global Ts_ev;
+% Some data conditioning
+T_ev = [T_ev(2:end) T_ev(end) + Ts_ev(end)];
+Ts_ev = [Ts_ev(2:end) Ts_ev(end)];
+T_ev = T_ev - T_ev(1);
 Ts_avg_ev = mean(Ts_ev);
 
 %% Run Di benedetto
@@ -64,19 +66,24 @@ V_diben  = get_V(x1_diben, x2_diben);
 global Ts_diben;
 Ts_avg_diben = mean(Ts_diben);
 
-%% Print averages
+%% Print averages and minimum times
 disp("Average Sample Periods");
 fprintf('Corollary 2: %f\n\n;', Ts_avg_corr2);
 fprintf('Dibenedetto: %f\n\n', Ts_avg_diben);
 fprintf('EventTriggered: %f\n\n', Ts_avg_ev);
 
+disp("Minimum Sample Periods");
+fprintf('Corollary 2: %f\n\n;', min(Ts_corr2));
+fprintf('Dibenedetto: %f\n\n', min(Ts_diben));
+fprintf('EventTriggered: %f\n\n', min(Ts_ev));
+
 %% Plot the results
 % Figure Parameters
 width       = 1000;
 height      = 400;
-font_size   = 25;
-marker_size = 15;
-line_width  = 2;
+font_size   = 50;
+marker_size = 30;
+line_width  = 4;
 
 % Individual plots
 
@@ -141,13 +148,6 @@ export_figure('ev_V.eps');
 
 % Event Triggered Ts Plot
 figure(6);
-global T_ev; global Ts_ev;
-% Some data conditioning
-%T_ev = T_ev - T_ev(2);
-T_ev = [T_ev(2:end) T_ev(end) + Ts_ev(end)];
-Ts_ev = [Ts_ev(2:end) Ts_ev(end)];
-T_ev = T_ev - T_ev(1);
-
 plot_Ts(T_ev, Ts_ev, color, line_width, marker, marker_size);
 xlabel("Time(s)");
 ylabel("Sample Period (s)");
