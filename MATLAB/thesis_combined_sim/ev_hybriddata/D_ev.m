@@ -46,5 +46,11 @@ else
     inside = 0;
 end
 
+global first_jump;
+if(first_jump == 1)
+    inside = 1;
+    first_jump = 0;
+end
+
 
 end

@@ -1,9 +1,11 @@
+function initialization_common(in_T, in_x1_o, in_x2_o)
+
 %% Common Simulation Parameters
 global x1_o; global x2_o;
 global T;
-x1_o = 0.2;
-x2_o = -0.2;
-T = 10;
+x1_o = in_x1_o;
+x2_o = in_x2_o;
+T = in_T;
 
 %% Data logging structures
 global T_corr2; global Ts_corr2;
@@ -66,8 +68,8 @@ end
 %scatter3(sls(1,:)',sls(2,:)', sls(3,:)');
 j = boundary(sls(1,:)', sls(2,:)');
 V_sls_boundary = [sls(1,j)',sls(2,j)']';
-figure(10);
-plot3(sls(1,j),sls(2,j),sls(2,j)*0 + V_sls_value);
+%figure(10);
+%plot3(sls(1,j),sls(2,j),sls(2,j)*0 + V_sls_value);
 xlabel("x_1"); ylabel("x_2");
 hold on;
 
@@ -86,3 +88,4 @@ max_norm  = max(vecnorm(Xrange));
 delta = max(vecnorm(sls(1:2,:))); % Technically a diben specific parameter, but
                                   % easier to define here
 
+end

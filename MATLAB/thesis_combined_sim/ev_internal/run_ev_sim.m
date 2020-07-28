@@ -22,6 +22,8 @@ global x1_o; global x2_o;
 global x1_p; global x2_p;
 x1_p = x1_o; x2_p = x2_o;
 
+global first_jump;
+first_jump = 1;
 u_o = ctl([x1_o;x2_o]);
 % State: x = [t x1   x2   tau  u    Ts]
 x0 =         [0 x1_o x2_o  0   u_o  0];   % Tau starts at 1 to make sure control 

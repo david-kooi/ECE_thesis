@@ -1,7 +1,11 @@
 clear all;
 close all;
 
-initialization_common();
+%% Initial Condition and Time Horizon
+x1_o = 0.3;
+x2_o = -0.1;
+T = 10;
+initialization_common(T, x1_o, x2_o);
 
 %% Run Corollary 2
 % Tunable parameters
@@ -132,6 +136,12 @@ set_figure_options(width, height, font_size);
 % Event Triggered Ts Plot
 figure(6);
 global T_ev; global Ts_ev;
+% Some data conditioning
+%T_ev = T_ev - T_ev(2);
+T_ev = [T_ev(2:end) T_ev(end) + Ts_ev(end)];
+Ts_ev = [Ts_ev(2:end) Ts_ev(end)];
+T_ev = T_ev - T_ev(1);
+
 plot_Ts(T_ev, Ts_ev, color, line_width, marker, marker_size);
 xlabel("Time(s)");
 ylabel("Sample Period (s)");
