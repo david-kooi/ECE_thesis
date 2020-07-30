@@ -14,7 +14,7 @@ T_min   = Ts_star;
 T_max   = 2;
 r       = 0.025;
 N       = 10;
-cs      = 1;
+cs      = 150;
 ch      = 0.5;
 method  = 1; % 0: Scaled TBar
              % 1: 2-Step horizon TBar
@@ -68,12 +68,12 @@ Ts_avg_diben = mean(Ts_diben);
 
 %% Print averages and minimum times
 disp("Average Sample Periods");
-fprintf('Corollary 2: %f\n\n;', Ts_avg_corr2);
+fprintf('Corollary 2: %f\n\n', Ts_avg_corr2);
 fprintf('Dibenedetto: %f\n\n', Ts_avg_diben);
 fprintf('EventTriggered: %f\n\n', Ts_avg_ev);
 
 disp("Minimum Sample Periods");
-fprintf('Corollary 2: %f\n\n;', min(Ts_corr2));
+fprintf('Corollary 2: %f\n\n', min(Ts_corr2));
 fprintf('Dibenedetto: %f\n\n', min(Ts_diben));
 fprintf('EventTriggered: %f\n\n', min(Ts_ev));
 
@@ -90,7 +90,7 @@ line_width  = 4;
 %% Corollary 2
 % Corollary 2 V plot
 color  = 'b';
-marker = '*'; 
+marker = 's'; 
 [modF, modJ] = get_hybrid_plot_mods(color, line_width, marker, marker_size);
 
 figure(1);
@@ -98,7 +98,7 @@ plotHarc(t_corr2,j_corr2,V_corr2, [], modF, modJ);
 xlabel("Time(s)");
 ylabel("V(x)");
 set_figure_options(width, height, font_size);
-export_figure('corr2_V.eps');
+export_figure('corr2_V_horizon_c_0_5.eps');
 
 
 % Corollary 2 Ts plot
@@ -108,7 +108,7 @@ plot_Ts(T_corr2, Ts_corr2, color, line_width, marker, marker_size);
 xlabel("Time(s)");
 ylabel("Sample Period (s)");
 set_figure_options(width, height, font_size);
-export_figure('corr2_Ts.eps');
+export_figure('corr2_Ts_horizon_c_0_5.eps');
 
 
 %% DiBenedetto
@@ -122,7 +122,7 @@ plotHarc(t_diben,j_diben,V_diben, [], modF, modJ);
 xlabel("Time(s)");
 ylabel("V(x)");
 set_figure_options(width, height, font_size);
-export_figure('diben_V');
+export_figure('diben_V.eps');
 
 % DiBenedetto Ts Plot
 figure(4);
@@ -154,3 +154,28 @@ ylabel("Sample Period (s)");
 set_figure_options(width, height, font_size);
 export_figure("ev_Ts.eps");
 
+%% Plot a comparison of Ts 
+figure(7);
+diben_color = 'm';
+diben_marker = 'd';
+plot_Ts(T_diben, Ts_diben, diben_color, line_width, diben_marker, marker_size);
+hold on;
+
+ev_color = 'k';
+ev_marker = 'o';
+plot_Ts(T_ev, Ts_ev, ev_color, line_width, ev_marker, marker_size);
+
+corr2_color = 'b';
+corr2_marker = 's';
+plot_Ts(T_corr2, Ts_corr2, corr2_color, line_width, corr2_marker, marker_size);
+
+xlabel("Time(s)");
+ylabel("Sample Period (s)");
+set_figure_options(width, height, font_size);
+export_figure("Ts_comparison.eps");
+
+h = zeros(3, 1);
+h(1) = plot(NaN,NaN, corr2_color,  'MarkerFaceColor', corr2_color, 'Marker', corr2_marker, 'MarkerSize', marker_size);
+h(2) = plot(NaN,NaN, diben_color,  'MarkerFaceColor', diben_color, 'Marker', diben_marker, 'MarkerSize', marker_size);
+h(3) = plot(NaN,NaN, ev_color,  'MarkerFaceColor', ev_color, 'Marker', ev_marker, 'MarkerSize', marker_size);
+legend(h, 'Corollary 2','[DiBenedetto, Theorem 4.3]','Event Triggered');

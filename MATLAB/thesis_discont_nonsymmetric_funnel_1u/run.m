@@ -18,11 +18,10 @@ close all;
 % initial conditions
 % State: x = [t x1 tau u Ts]
 x0 =         [0 0 1 0 0];         % Tau starts at 1 to make sure control 
-                                     % Calculated from the start
+                                  % Calculated from the start
 global df;
 global ctl;
 global u1; global u2; global lambda;
-
 
 global psi_1;
 global psi_1_dot;
@@ -31,6 +30,9 @@ global psi_2_dot;
 global V;
 global rho_1;
 global rho_2;
+
+global T_arr;
+global Ts_arr;
 
 % Minimum Time and barT
 global Ts_min;
@@ -42,10 +44,14 @@ get_funnel();
 get_control();
 
 
-%%
 % simulation horizon
-TSPAN=[0 40];
+T=10; 
+TSPAN=[0 T];
 JSPAN = [0 10000];
+
+% Set to 1 to run Ts_min calculation
+% Set to 0 to not run 
+get_Ts_min(1, T);
 
 % rule for jumps
 % rule = 1 -> priority for jumps
@@ -61,67 +67,51 @@ options = odeset('RelTol',1e-6,'MaxStep',.1);
 
 x1_arr = x(:,2);
 u_arr  = x(:,4);
-Ts_arr = x(:,5);
-
- set(gca, 'FontName', 'Times New Roman');
-% % plot solution
- figure() % position
- 
-modF{1} = 'k';
-modJ{1} = 'k';
-modJ{2} = 'Marker';
-modJ{3} = '*';
- subplot(2,1,1), plotHarc(t,j,x(:,2), [], modF, modJ);
-  set(gca, 'FontName', 'Times New Roman');
- hold on;
- plot(t, psi_1(t), "r");
- hold on
- plot(t, psi_2(t), "b");
- xlabel("Time (s)");
- ylabel("x");
 
 
- subplot(2,1,2), plotHarc(t,j,x(:,5), [], modF, modJ);
- set(gca, 'FontName', 'Times New Roman');
- grid on
- ylabel('Sample Period(s)');
- xlabel("Time(s)");
- hold on;
 
+%% Plot psi1, psi2, x1
+% Figure Parameters
+width       = 1000;
+height      = 400;
+font_size   = 50;
+marker_size = 20;
+line_width  = 4;
+
+color = 'b';
+marker = 's';
+[modF, modJ] = get_hybrid_plot_mods(color, line_width, marker, marker_size);
+
+figure(1);
+plotHarc(t,j, x1_arr, [], modF, modJ);
+hold on;
+plot(t, psi_1(t), "k--", "LineWidth", line_width);
+hold on
+plot(t, psi_2(t), "k:", "LineWidth", line_width);
+xlabel("Time(s)");
+ylabel("x_1");
+set_figure_options(width, height, font_size);
+% Add legend
 h = zeros(3, 1);
-h(1) = plot(NaN,NaN,'r');
-h(2) = plot(NaN,NaN,'b');
-h(3) = plot(NaN,NaN,'k');
-legend(h, '\psi_1','\psi_2','x');
-set(gca, 'FontName', 'Times New Roman');
+h(1) = plot(NaN,NaN,'bs', "LineWidth", line_width);
+h(2) = plot(NaN,NaN,'k--', "LineWidth", line_width);
+h(3) = plot(NaN,NaN,'k:', "LineWidth", line_width);
+legend(h, 'x_1','\psi_1(t)','\psi_2(t)');
 
 
-%figure(2);
-%plot(t,df(t));
-%hold on;
+export_figure('funnel_x1.eps');
 
-%figure(3);
-%plot(t, u_arr);
+% Ts Plot
+figure(2);
+global T_arr; global Ts_arr;
+plot_Ts(T_arr, Ts_arr, color, line_width, marker, marker_size);
+xlabel("Time(s)");
+ylabel("Sample Period (s)");
+set_figure_options(width, height, font_size);
+export_figure('funnel_Ts.eps');
 
-%figure(4);
-%bar(Ts_arr);
-
-
-
-
-
-% 
-% 
-% figure(2);
-% plot(t,psi(t,0));
-% 
-% 
-% % plot hybrid arc
- figure(6)
- plotHybridArc(t,j,x(:,2));
- xlabel('j')
- ylabel('t')
- zlabel('x1')
+fprintf('Average Sample Period: %f\n\n', mean(Ts_arr));
+fprintf('Minimum Sample Period: %f\n\n', min(Ts_arr));
 
 
 %% System

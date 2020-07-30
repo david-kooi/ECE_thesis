@@ -10,7 +10,6 @@ x_dot_normalized = norm_x_dot/max_x_dot;
 global cs;
 T_max = 2;
 T_min = Ts_min;
-TBar = 
 TBar = (T_max - T_min)*(1- x_dot_normalized).^cs + T_min;
 
 

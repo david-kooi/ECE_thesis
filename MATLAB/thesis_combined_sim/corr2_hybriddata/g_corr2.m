@@ -22,8 +22,8 @@ Ts   = x(6);
 x_o          = [x1;x2];
 u_o          = ctl(x_o);
 
-global method;
-if(method == 0)
+global TBar_method;
+if(TBar_method == 0)
     [M, TBar] = get_M_TBar_scaled(x_o, u_o);
 else
     [M, TBar] = get_M_TBar_horizon2(x_o, u_o);

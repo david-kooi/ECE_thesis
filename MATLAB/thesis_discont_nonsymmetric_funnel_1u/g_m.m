@@ -54,7 +54,12 @@ inner_rho = -(f1.*rho2 - f2.*rho1 + u.*(rho1 - rho2));
 M = max(inner_rho);
 
 rho = rho_1(t,x1)*rho_2(t,x1);
-Ts_plus = max(Ts_min, min(barT, rho/M)) ;
+Ts_plus = max(Ts_min, min(barT, rho/M));
 
 xplus = [t; x1; 0; u; Ts_plus];
+
+global T_arr;
+global Ts_arr;
+T_arr = [T_arr t];
+Ts_arr = [Ts_arr Ts_plus];
 end

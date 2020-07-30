@@ -21,11 +21,10 @@ global rho_2;
 
 
 Ts_xo_barT = [];
-barT_arr = 0.25:0.25:10 ;
+barT_arr = 0.25:0.25:10;
 for (barT = barT_arr)
     
-    Ts_xo = get_Ts(barT, T);
-    
+    Ts_xo = get_Ts(barT, T);   
     Ts_xo_barT = [Ts_xo_barT min(Ts_xo)];
      
 end
