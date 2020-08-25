@@ -98,7 +98,7 @@ plotHarc(t_corr2,j_corr2,V_corr2, [], modF, modJ);
 xlabel("Time(s)");
 ylabel("V(x)");
 set_figure_options(width, height, font_size);
-export_figure('corr2_V_horizon_c_0_5.eps');
+export_figure('.eps');
 
 
 % Corollary 2 Ts plot
