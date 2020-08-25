@@ -24,12 +24,16 @@ u_o          = ctl(x_o);
 
 global TBar_method;
 if(TBar_method == 0)
-    [M, TBar] = get_M_TBar_scaled(x_o, u_o);
+    [Mr, Ms, TBar] = get_M_TBar_scaled(x_o, u_o);
 else
-    [M, TBar] = get_M_TBar_horizon2(x_o, u_o);
+    [Mr, Ms, TBar] = get_M_TBar_horizon2(x_o, u_o);
 end
 
-Ts_plus = get_Ts(x_o, M, TBar);
+% Old sampling function
+%Ts_plus = get_Ts(x_o, Ms, TBar);
+Ts_plus = get_Ts_new(x_o, Mr, Ms, TBar);
+
+
 xplus   = [t; x1; x2; 0; u_o; Ts_plus];
 
 %% Data Recording

@@ -4,5 +4,5 @@ global V;
 global Ts_min;
 
 rho = V_sls_value - V(x_o);
-Ts_plus = max(Ts_min, min(TBar, rho/M)) ;
+Ts_plus = max(Ts_min, min(TBar, rho/M));
 end

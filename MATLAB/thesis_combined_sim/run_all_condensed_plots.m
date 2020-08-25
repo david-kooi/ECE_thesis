@@ -2,11 +2,18 @@ clear all;
 close all;
 
 %% Figure Parameters
+% For laptop screen
+% width       = 1000;
+% height      = 400;
+% font_size   = 50;
+% marker_size = 20;
+% line_width  = 4;
+
 width       = 1000;
 height      = 400;
-font_size   = 50;
-marker_size = 20;
-line_width  = 4;
+font_size   = 18;
+marker_size = 10;
+line_width  = 2;
 
 %% Initial Condition and Time Horizon
 x1_o = -0.1;

@@ -1,4 +1,4 @@
-function [M1,TBar] = get_M_TBar_horizon(x_o, u_o)
+function [Mr, Ms,TBar] = get_M_TBar_horizon2(x_o, u_o)
 
 global A;
 global B;
@@ -26,14 +26,14 @@ for( n0 = 0:N-1)
    subReach0 = Xrange0(idx, :);
    subTime0  = Trange0(idx,:);
    
-%    figure(10);
-%    scatter(subReach0(:,1), subReach0(:,2));  
+%     figure(10);
+%     scatter(subReach0(:,1), subReach0(:,2));  
    
-   [M0, arg_M] = get_M(x_o, u_o, TBar0, subReach0, subTime0);
+   [M0_s, arg_M] = get_M(x_o, u_o, TBar0, subReach0, subTime0);
    
-   Ts0     = get_Ts(x_o, M0, TBar0);
+   Ts0     = get_Ts(x_o, M0_s, TBar0);
    Ts_arr(n0+1, 1) = Ts0; 
-   M_arr = [M_arr; M0];
+   M_arr = [M_arr; M0_s];
    
    %% Fill with expansion
    x_1 = arg_M';
@@ -52,8 +52,8 @@ for( n0 = 0:N-1)
 %       scatter(subReach1(:,1), subReach1(:,2));
 %       hold on;
       
-      M1  = get_M(x_1, u_1, TBar1, subReach1, subTime1);
-      Ts1 = get_Ts(x_1, M1, TBar1);
+      M1_s  = get_M(x_1, u_1, TBar1, subReach1, subTime1);
+      Ts1 = get_Ts(x_1, M1_s, TBar1);
       
       Ts_arr(n0+1, n1+2) = Ts1;
    end
@@ -72,7 +72,12 @@ end
 [Ts_max, max_lin_idx] = max(P,[],'all','linear');
 [max_r_idx, max_c_idx] = ind2sub([N N], max_lin_idx);
 
-M1   = M_arr(max_r_idx);
+
+Ms   = M_arr(max_r_idx);
 TBar = Ts_arr(max_r_idx,1); 
+
+% Find Mr
+Mr = get_Mr(x_o, u_o, TBar);
+
 
 end

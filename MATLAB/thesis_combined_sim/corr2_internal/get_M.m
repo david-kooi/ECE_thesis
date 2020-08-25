@@ -1,4 +1,6 @@
-function [M,arg_M] = get_M(x_o, u_o, TBar, Xrange, Trange)
+% Gets Ms for Theorem 1 sampling
+
+function [M,arg_M] = get_M(x_o, u_o, TBar, Xrange, TRange)
 
 global A;
 global B;
@@ -8,7 +10,6 @@ global V;
 if ~exist('Xrange','var') || isempty(Xrange)
     Xrange = get_reach_set(x_o, u_o, TBar);
 end
-
 
 F_u = (A*Xrange' + B*u_o);
 
