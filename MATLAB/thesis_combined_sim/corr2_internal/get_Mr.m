@@ -1,4 +1,4 @@
-% Gets Ms for Theorem 1 sampling
+% Gets Mr 
 
 function [Mr,arg_M] = get_Mr(xo, u_o, TBar, Xrange)
 

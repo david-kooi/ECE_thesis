@@ -1,4 +1,4 @@
-function [Xrange, Trange] = get_reach_set_stepped(x_o, u_o, TBar)
+function [Xrange, Trange, x_f] = get_reach_set_stepped(x_o, u_o, TBar)
 
 global max_norm;
 global V;
@@ -7,7 +7,7 @@ global V_sls_value;
 % Compute next sampling time
 options = odeset();
 [Tout, Xrange] = ode45(@F_dynamic,[0 TBar], x_o, options, u_o);
-
+x_f = Xrange(end, 1:2);
 
 % Inflate the trajectory (The indexes of the nearest neighbors)
 % Comment out below to use the perfect reach set. 

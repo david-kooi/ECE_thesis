@@ -26,7 +26,8 @@ global TBar_method;
 if(TBar_method == 0)
     [Mr, Ms, TBar] = get_M_TBar_scaled(x_o, u_o);
 else
-    [Mr, Ms, TBar] = get_M_TBar_horizon2(x_o, u_o);
+%    [Mr, Ms, TBar] = get_M_TBar_horizon2(x_o, u_o);
+    [Mr, Ms, TBar] = get_M_TBar_horizon2_new(x_o, u_o);
 end
 
 % Old sampling function

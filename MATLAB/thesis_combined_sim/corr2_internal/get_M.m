@@ -1,6 +1,6 @@
 % Gets Ms for Theorem 1 sampling
 
-function [M,arg_M] = get_M(x_o, u_o, TBar, Xrange, TRange)
+function [M,arg_M] = get_M(x_o, u_o, TBar, Xrange, ~)
 
 global A;
 global B;
