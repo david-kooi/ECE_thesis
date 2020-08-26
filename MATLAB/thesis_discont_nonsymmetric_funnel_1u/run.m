@@ -17,7 +17,7 @@ close all;
 
 % initial conditions
 % State: x = [t x1 tau u Ts]
-x0 =         [0 0 1 0 0];         % Tau starts at 1 to make sure control 
+x0 =         [0 1.5 1 0 0];         % Tau starts at 1 to make sure control 
                                   % Calculated from the start
 global df;
 global ctl;
@@ -37,8 +37,8 @@ global Ts_arr;
 % Minimum Time and barT
 global Ts_min;
 global barT;
-Ts_min = 0.56;
-barT   = 1.75;
+Ts_min = 0.31;
+barT   = 2;
 
 get_funnel();
 get_control();
@@ -54,7 +54,7 @@ plot_funnel();
 
 % Set to 1 to run Ts_min calculation
 % Set to 0 to not run 
-get_Ts_min(1, T);
+get_Ts_min(0, T);
 
 % rule for jumps
 % rule = 1 -> priority for jumps
@@ -102,15 +102,15 @@ hold on;
 plot(t, psi_1(t), "k--", "LineWidth", line_width);
 hold on
 plot(t, psi_2(t), "k:", "LineWidth", line_width);
-xlabel("Time(s)");
-ylabel("x_1");
+xlabel("t");
+ylabel("$$x_1$$", "Interpreter", "latex");
 set_figure_options(width, height, font_size);
 % Add legend
 h = zeros(3, 1);
-h(1) = plot(NaN,NaN,'bs', "LineWidth", line_width);
+h(1) = plot(NaN,NaN,'bs', "LineWidth", line_width, "MarkerFaceColor", "b");
 h(2) = plot(NaN,NaN,'k--', "LineWidth", line_width);
 h(3) = plot(NaN,NaN,'k:', "LineWidth", line_width);
-legend(h, 'x_1','\psi_1(t)','\psi_2(t)');
+legend(h, '$x_1$','$\psi_1(t)$','$\psi_2(t)$', "Interpreter", "latex");
 
 
 export_figure('funnel_x1.eps');
@@ -119,8 +119,8 @@ export_figure('funnel_x1.eps');
 figure(2);
 global T_arr; global Ts_arr;
 plot_Ts(T_arr, Ts_arr, color, line_width, marker, marker_size);
-xlabel("Time(s)");
-ylabel("Sample Period (s)");
+xlabel("t");
+ylabel("Sample Period");
 set_figure_options(width, height, font_size);
 export_figure('funnel_Ts.eps');
 
@@ -128,12 +128,3 @@ fprintf('Average Sample Period: %f\n\n', mean(Ts_arr));
 fprintf('Minimum Sample Period: %f\n\n', min(Ts_arr));
 
 
-%% System
-function [g1, g2] = g(x)
-    g1 = x(2); g2 = 1;
-end
-
-function [dVdx1, dVdx2] = gradV(x)
-    dVdx1 = x(1);
-    dVdx2 = x(2);
-end

@@ -29,7 +29,7 @@ Ts_xo_buffer = [];
 Ts_xo = [];
 for(to = tspan)
     for(xo = [psi_1(to), psi_2(to)])
-
+        
         uo = ctl(to,xo);
         Trange = to:0.1:to+barT;
         Xrange = (0:0.1:barT).*uo + xo;

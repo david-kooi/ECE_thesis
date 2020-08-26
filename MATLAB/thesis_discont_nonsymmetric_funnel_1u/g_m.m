@@ -54,17 +54,8 @@ Ts   = x(5);
 
 
 
-% Compute next sampling time
 
-Trange = t:0.01:t+barT;
-Xrange = (0:0.01:barT).*u + x1;
 
-psi1   = psi_1(Trange);
-psi2   = psi_2(Trange);
-rho1   = rho_1(Trange, Xrange);
-rho2   = rho_2(Trange, Xrange);
-f1     = psi_1_dot(Trange);
-f2     = psi_2_dot(Trange);
 
 
 %% Compute Mr
@@ -77,13 +68,13 @@ f2     = psi_2_dot(Trange);
     
         reachableSet = [Trange; Xrange];
         % Inflate the solution
-        r = 0.5;
+        r = 0.25;
         Xrange = inflate_points(reachableSet, r);
       
         Trange = Xrange(:,1)';
         Xrange = Xrange(:,2)';
-        figure(1);
-        plot(Trange, Xrange);
+%        figure(1);
+%        plot(Trange, Xrange);
         
         df     = d_f(Trange, Xrange);
         dddt   = dddt_f(Trange, Xrange);
@@ -100,7 +91,7 @@ f2     = psi_2_dot(Trange);
         lam    = lambda(Trange, Xrange);
         x = Xrange;
         
-        inner_gamma = (-uo.*(psi1 - psi2).*(2*(psi1 - psi2).*(u - uo) - (rho1 - rho2).*(dddx.*(psi1 - psi2) + f1 - f2)) + (f1 - f2).*(psi1 - psi2).^2.*(u - uo) + (rho1 - rho2).*(2*df.*(rho1.*(f1 - f2) + (f1 - u).*(psi1 - psi2)) + (psi1 - psi2).^2.*(lam.*(dddt + f2dot) + (dddt - f1dot).*(lam - 1))))./(psi1 - psi2).^2;
+        inner_gamma = -(-uo.*(psi1 - psi2).*(2*(psi1 - psi2).*(u - uo) - (rho1 - rho2).*(dddx.*(psi1 - psi2) + f1 - f2)) + (f1 - f2).*(psi1 - psi2).^2.*(u - uo) + (rho1 - rho2).*(2*df.*(rho1.*(f1 - f2) + (f1 - u).*(psi1 - psi2)) + (psi1 - psi2).^2.*(lam.*(dddt + f2dot) + (dddt - f1dot).*(lam - 1))))./(psi1 - psi2).^2;
         inner_alpha = (uo.*(psi1 - psi2).*((psi1 - psi2).*(f1 + f2 - 2*u) + (rho1 - rho2).*(dddx.*(psi1 - psi2) + f1 - f2)) + (psi1 - psi2).^2.*(f1dot.*rho2 - f2dot.*rho1 - 2*f1.*f2 + u.*(f1 - f2)) + (rho1 - rho2).*(2*df.*(rho1.*(f1 - f2) + (f1 - u).*(psi1 - psi2)) + (psi1 - psi2).^2.*(lam.*(dddt + f2dot) + (dddt - f1dot).*(lam - 1))))./(psi1 - psi2).^2;
         
         M_gamma = max(inner_gamma);
