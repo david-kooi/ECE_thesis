@@ -30,10 +30,17 @@ if(run)
     
     %% Plot the results
     % Figure Parameters
+%     width       = 1000;
+%     height      = 500;
+%     font_size   = 50;
+%     marker_size = 30;
+%     line_width  = 2;
+
+% Laptop 
     width       = 1000;
     height      = 500;
-    font_size   = 50;
-    marker_size = 30;
+    font_size   = 18;
+    marker_size = 10;
     line_width  = 2;
     
     figure(4);

@@ -3,10 +3,28 @@
 function get_funnel()
 
 
+
+
 %get_funnel_1();
 %get_funnel_2();
 get_funnel_3();
 %get_funnel_4();
+
+% Set alpha function with the funnel functions
+global ctl;
+global psi_1;
+global psi_1_dot;
+global psi_1_ddot;
+global psi_2;
+global psi_2_dot;
+global psi_2_ddot;
+global V;
+global rho_1;
+global rho_2;
+
+global alpha;
+alpha = @(t,x) (psi_1_dot(t) - ctl(t,x)).*rho_2(t,x) + (ctl(t,x) - psi_2_dot(t)).*rho_1(t,x) + ctl(t,x).*(rho_1(t,x) -rho_2(t,x));
+
 end
 
 function get_funnel_1()

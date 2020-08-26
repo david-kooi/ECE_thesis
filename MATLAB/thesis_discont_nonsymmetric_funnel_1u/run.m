@@ -45,9 +45,12 @@ get_control();
 
 
 % simulation horizon
+global T;
 T=10; 
 TSPAN=[0 T];
 JSPAN = [0 10000];
+
+plot_funnel();
 
 % Set to 1 to run Ts_min calculation
 % Set to 0 to not run 
@@ -72,11 +75,22 @@ u_arr  = x(:,4);
 
 %% Plot psi1, psi2, x1
 % Figure Parameters
+
+% For monitor
+% width       = 1000;
+% height      = 400;
+% font_size   = 50;
+% marker_size = 20;
+% line_width  = 4;
+
+% For laptop
 width       = 1000;
 height      = 400;
-font_size   = 50;
-marker_size = 20;
-line_width  = 4;
+font_size   = 18;
+marker_size = 8;
+line_width  = 2;
+
+
 
 color = 'b';
 marker = 's';
