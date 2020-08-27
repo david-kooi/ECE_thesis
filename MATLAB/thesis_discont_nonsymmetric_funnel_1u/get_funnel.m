@@ -117,7 +117,7 @@ d = 0.1;
 
 epsilon = 0;
 
-psi_1      = @(t) (-a.*t.^2 + b).*exp(-t);
+psi_1      = @(t) (-a.*t.^2 + b).*exp(-t)+0.1;
 psi_1_dot  = @(t) -2*a.*t.*exp(-t) - (-a.*t.^2 + b).*exp(-t);
 psi_1_ddot = @(t) 4*a.*t.*exp(-t) - 2*a.*exp(-t) - (a.*t.^2 - b).*exp(-t);
 psi_2      = @(t) (-c - exp(-t)).*exp(-d.*t)-epsilon;

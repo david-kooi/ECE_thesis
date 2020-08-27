@@ -54,7 +54,7 @@ plot_funnel();
 
 % Set to 1 to run Ts_min calculation
 % Set to 0 to not run 
-get_Ts_min(0, T);
+get_Ts_min(1, T);
 
 % rule for jumps
 % rule = 1 -> priority for jumps

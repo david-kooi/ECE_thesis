@@ -23,7 +23,7 @@ global dddx_f;
 %dddx_f = @(t,x) 0; 
 
 
-d_f = @(t,x) 1./(t+0.1);
+d_f = @(t,x) 1./(t+0.1) +0.1;
 dddt_f = @(t,x) - 1./(t.^2);
 dddx_f = @(t,x) 0; 
 
