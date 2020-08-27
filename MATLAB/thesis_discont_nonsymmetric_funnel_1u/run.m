@@ -17,7 +17,7 @@ close all;
 
 % initial conditions
 % State: x = [t x1 tau u Ts]
-x0 =         [0 1.5 1 0 0];         % Tau starts at 1 to make sure control 
+x0 =         [0 0 1 0 0];         % Tau starts at 1 to make sure control 
                                   % Calculated from the start
 global df;
 global ctl;
@@ -37,8 +37,8 @@ global Ts_arr;
 % Minimum Time and barT
 global Ts_min;
 global barT;
-Ts_min = 0.31;
-barT   = 2;
+Ts_min = 0.311;
+barT   = 1.5;
 
 get_funnel();
 get_control();
@@ -54,7 +54,7 @@ plot_funnel();
 
 % Set to 1 to run Ts_min calculation
 % Set to 0 to not run 
-get_Ts_min(1, T);
+get_Ts_min(0, T);
 
 % rule for jumps
 % rule = 1 -> priority for jumps

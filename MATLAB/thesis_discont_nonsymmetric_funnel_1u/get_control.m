@@ -22,10 +22,15 @@ global dddx_f;
 %dddt_f = @(t,x) -(psi_1_dot(t) - psi_2_dot(t))./(psi_1(t) - psi_2(t)).^2;
 %dddx_f = @(t,x) 0; 
 
-
-d_f = @(t,x) 1./(t+0.1) +0.1;
-dddt_f = @(t,x) - 1./(t.^2);
+% Constant d
+d_f = @(t,x) 0.4;
+dddt_f = @(t,x) 0;
 dddx_f = @(t,x) 0; 
+
+% Vaninishing d
+% d_f = @(t,x) 1./(t+0.1) +0.1;
+% dddt_f = @(t,x) - 1./(t.^2);
+% dddx_f = @(t,x) 0; 
 
 % d as funnel distance
 % df = @(t,x) psi_1(t) - psi_2(t);

@@ -307,7 +307,7 @@ h(1) = plot(NaN,NaN, corr2_horizon_color,  'MarkerFaceColor', corr2_horizon_colo
 h(2) = plot(NaN,NaN, corr2_scaled_color,  'MarkerFaceColor', corr2_scaled_color, 'Marker', corr2_scaled_marker, 'MarkerSize', marker_size);
 h(3) = plot(NaN,NaN, diben_color,  'MarkerFaceColor', diben_color, 'Marker', diben_marker, 'MarkerSize', marker_size);
 h(4) = plot(NaN,NaN, ev_color,  'MarkerFaceColor', ev_color, 'Marker', ev_marker, 'MarkerSize', marker_size);
-legend(h, 'Corollary 2, $c_h = 0.5$', 'Corollary 2, $c_s=150$', '[15, Theorem 4.3]','Event Triggered', "Interpreter", "latex");
+legend(h, 'Theorem 5, $c_h = 0.5$', 'Theorem 5, $c_s=150$', '[15, Theorem 4.3]','Event Triggered', "Interpreter", "latex");
 
 set_figure_options(width, height, font_size);
 export_figure('V_comparison.eps');

@@ -47,7 +47,7 @@ if(run)
     plot(barT_arr, Ts_xo_barT, "k", "LineWidth", line_width);
     set_figure_options(width, height, font_size);
     xlabel("$\bar{T}$", 'interpreter','latex')
-    ylabel("$T^*_s$",'interpreter','latex' );
+    ylabel("$T_2$",'interpreter','latex' );
     export_figure('funnel_Ts_calc.eps');
     hold on
 
